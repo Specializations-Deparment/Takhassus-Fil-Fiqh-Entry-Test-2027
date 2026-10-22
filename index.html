@@ -3,103 +3,138 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>تخصص فی الفقہ ٹیسٹ رجسٹریشن</title>
+<title>تخصص فی الفقہ انٹری ٹیسٹ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f6f2;--ink:#1c2622;--mute:#5d6b65;--line:#d3dcd5;--green:#17503f;--gold:#9a6f12;--err:#a32a2a;--card:#fff}
+@font-face{font-family:"Jameel Noori Nastaleeq";src:local("Jameel Noori Nastaleeq"),local("JameelNooriNastaleeq"),url("JameelNooriNastaleeq.ttf") format("truetype");font-display:swap}
+:root{--bg:#f3f5f1;--ink:#1c2622;--mute:#5d6b65;--line:#d6ded8;--green:#17503f;--green2:#27856a;--gold:#b0852a;--err:#a32a2a;--card:#fff;--num:system-ui,"Segoe UI",Arial,sans-serif}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Naskh Arabic","Jameel Noori Nastaleeq",serif;font-size:18px;line-height:1.9}
-header{background:var(--green);color:#fff;padding:36px 20px 30px;text-align:center}
-header h1{margin:0 0 6px;font-size:34px;font-weight:700}
-header p{margin:0 auto;max-width:560px;color:#cfe3da;font-size:17px}
-main{max-width:640px;margin:0 auto;padding:24px 16px 60px}
-section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 20px;margin-bottom:24px}
-h2{margin:0 0 14px;font-size:24px;color:var(--green);border-bottom:2px solid var(--gold);display:inline-block;padding-bottom:2px}
-label{display:block;margin:14px 0 4px;font-weight:600}
-input,select{width:100%;padding:10px 12px;font:inherit;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
-input:focus,select:focus,button:focus-visible{outline:3px solid #8fc2b0;outline-offset:1px}
-.hint{color:var(--mute);font-size:15px;margin:2px 0 0}
-#prev{display:none;width:110px;height:140px;object-fit:cover;border:1px solid var(--line);border-radius:6px;margin-top:8px}
-button{margin-top:20px;width:100%;padding:12px;font:inherit;font-weight:700;color:#fff;background:var(--green);border:0;border-radius:6px;cursor:pointer}
-button:disabled{opacity:.6;cursor:wait}
-.msg{margin-top:16px;padding:12px 14px;border-radius:6px;display:none}
-.ok{display:block;background:#e6f2ec;border:1px solid #9cc7b5}
-.bad{display:block;background:#f9e8e8;border:1px solid #e0a9a9;color:var(--err)}
-.code{font-size:30px;font-weight:700;letter-spacing:2px;color:var(--green);direction:ltr;text-align:center;margin:6px 0;user-select:all}
-.ltr{direction:ltr;text-align:right}
-.rc{margin-top:18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-.rc-h{background:linear-gradient(135deg,#17503f,#27856a);color:#fff;text-align:center;padding:22px 12px}
-.rc-t{font-size:26px;font-weight:700}
-.rc-s{direction:ltr;font-size:17px;color:#d6ebe2;font-family:system-ui,sans-serif}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Jameel Noori Nastaleeq","Noto Nastaliq Urdu",serif;font-size:18px;line-height:2.2}
+.hero{background:linear-gradient(135deg,#123f32,#1f6b55);color:#fff;text-align:center;padding:34px 18px 54px;border-bottom:4px solid var(--gold)}
+.hero h1{margin:0;font-size:32px;font-weight:700;line-height:2}
+.hero .sub{color:#cfe6dc;font-size:17px}
+main{max-width:720px;margin:-30px auto 0;padding:0 14px 60px}
+.tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px;box-shadow:0 4px 14px rgba(20,60,45,.08)}
+.tabs button{flex:1;padding:6px 8px;font:inherit;font-weight:600;border:0;border-radius:8px;background:transparent;color:var(--mute);cursor:pointer;line-height:2}
+.tabs button.on{background:var(--green);color:#fff}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 20px;margin-top:16px;box-shadow:0 4px 14px rgba(20,60,45,.06)}
+.lead{color:var(--mute);margin:0 0 6px;font-size:17px}
+.grp{margin-top:20px}
+.grp h3{margin:0 0 4px;font-size:20px;color:var(--green);border-right:4px solid var(--gold);padding-right:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+label{display:block;margin:10px 0 0;font-weight:600;font-size:17px}
+label i{color:var(--err);font-style:normal}
+input,select{width:100%;padding:6px 12px;font:inherit;line-height:2;border:1px solid var(--line);border-radius:8px;background:#fbfcfb;color:var(--ink)}
+input:focus,select:focus,.btn:focus-visible,.tabs button:focus-visible{outline:3px solid #9fd0bd;outline-offset:1px;border-color:var(--green2)}
+.ltr{direction:ltr;text-align:right;font-family:var(--num)}
+.photo{display:flex;gap:16px;align-items:center;margin-top:10px}
+#prev{width:96px;height:122px;object-fit:cover;border:2px dashed #b9c8bf;border-radius:10px;background:#f1f5f2;flex:none}
+.hint{color:var(--mute);font-size:15px;margin:2px 0 0;line-height:1.9}
+.btn{margin-top:22px;width:100%;padding:8px;font:inherit;font-weight:700;color:#fff;background:var(--green);border:0;border-radius:8px;cursor:pointer;line-height:2}
+.btn:hover{background:#12402f}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.ghost{background:#fff;color:var(--green);border:1px solid var(--green);margin-top:10px}
+.msg{margin-top:16px;padding:10px 14px;border-radius:8px;display:none}
+.bad{display:block;background:#fbeaea;border:1px solid #e4b3b3;color:var(--err)}
+.done{text-align:center;padding:6px 0}
+.tick{width:56px;height:56px;line-height:56px;margin:0 auto;border-radius:50%;background:#dcf5e5;color:var(--green);font-size:30px;font-family:var(--num)}
+.done h3{margin:8px 0 0;color:var(--green)}
+.code{font:700 32px/1.6 var(--num);letter-spacing:3px;color:var(--green);direction:ltr;background:#eef6f1;border:1px dashed var(--green2);border-radius:10px;padding:6px;margin:8px 0;user-select:all}
+.rc{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.rc-h{background:linear-gradient(135deg,#123f32,#27856a);color:#fff;text-align:center;padding:16px 12px;border-bottom:4px solid var(--gold)}
+.rc-t{font-size:25px;font-weight:700;line-height:2}
+.rc-s{direction:ltr;font:16px var(--num);color:#d6ebe2;letter-spacing:.5px}
 .rc-b{padding:18px 16px}
 .rc-top{display:flex;gap:16px;align-items:flex-start}
 .rc-top img{width:104px;height:132px;object-fit:cover;border:3px solid #cfe7dc;border-radius:10px;flex:none}
-.rc-info{line-height:2}
-.rc-name{font-size:24px;font-weight:700}
-.rc-info b{color:var(--green);letter-spacing:1px;direction:ltr;display:inline-block}
-.rc-box{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-top:14px;text-align:center}
-.rc-box small{display:block;color:var(--mute);font-size:14px}
-.rc-box .big{font-size:22px;font-weight:700}
+.rc-info{line-height:2.1;font-size:17px}
+.rc-name{font-size:24px;font-weight:700;color:var(--green)}
+.num{direction:ltr;display:inline-block;font-family:var(--num)}
+.rc-info b{color:var(--green);letter-spacing:1px;direction:ltr;display:inline-block;font-family:var(--num)}
+.rc-box{border:1px solid var(--line);border-radius:10px;padding:8px 16px;margin-top:14px;text-align:center}
+.rc-box small{display:block;color:var(--mute);font-size:14px;line-height:1.8}
+.rc-box .big{font-size:21px;font-weight:700}
 .rc-st.p{background:#dcf5e5;border-color:#bfe3cc;color:#17503f}
 .rc-st.f{background:#fbe5e5;border-color:#efc0c0;color:#a32a2a}
 .rc-st.w{background:#fdf1d8;border-color:#ecd49a;color:#7a5608}
-.rc-sc{text-align:right}
-.rc-sc .n{display:flex;align-items:baseline;gap:8px;margin-top:4px}
-.rc-sc .n b{font-size:34px;font-family:system-ui,sans-serif}
-.rc-sc .n span{direction:ltr;color:var(--mute);font-family:system-ui,sans-serif}
-.rc-f{background:#f2f4f2;border-top:1px solid var(--line);text-align:center;padding:8px;font-size:15px;color:var(--mute)}
+.rc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rc-grid .rc-box{margin-top:14px}
+.rc-grid b{font:700 36px/1.4 var(--num);color:var(--ink)}
+.rc-grid span{font:15px var(--num);color:var(--mute);direction:ltr;display:inline-block}
+.rc-f{background:#f2f4f2;border-top:1px solid var(--line);text-align:center;padding:6px;font-size:15px;color:var(--mute)}
+@media print{.hero,.tabs,#p1,#p2 .form,.noprint{display:none!important}body{background:#fff}section{border:0;box-shadow:none;padding:0}main{margin:0}}
 </style>
 </head>
 <body>
-<header>
-  <h1>تخصص فی الفقہ ٹیسٹ رجسٹریشن</h1>
-  <p>اپنی تفصیلات درج کریں۔ جمع کرنے کے بعد آپ کو ایک ٹریکنگ کوڈ ملے گا، جس سے آپ بعد میں اپنا اسٹیٹس اور نتیجہ دیکھ سکتے ہیں۔</p>
+<header class="hero">
+  <h1>تخصص فی الفقہ انٹری ٹیسٹ</h1>
+  <div class="sub">آن لائن رجسٹریشن اور نتیجہ · 2027</div>
 </header>
 <main>
 
-<section>
-  <h2>درخواست دیں</h2>
+<nav class="tabs noprint">
+  <button id="t1" class="on" type="button">درخواست دیں</button>
+  <button id="t2" type="button">اسٹیٹس اور نتیجہ</button>
+</nav>
+
+<section id="p1">
+  <p class="lead">اپنی تفصیلات درج کریں۔ جمع کرنے کے بعد آپ کو ایک ٹریکنگ کوڈ ملے گا، جس سے آپ بعد میں اپنا اسٹیٹس اور نتیجہ دیکھ سکتے ہیں۔</p>
   <div id="form">
-    <label for="photo">تصویر</label>
-    <input id="photo" type="file" accept="image/*">
-    <p class="hint">پاسپورٹ سائز کی صاف تصویر لگائیں۔</p>
-    <img id="prev" alt="منتخب تصویر">
+    <div class="grp">
+      <h3>ذاتی معلومات</h3>
+      <div class="photo">
+        <img id="prev" alt="تصویر" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 122'%3E%3Ccircle cx='48' cy='46' r='20' fill='%23c5d3ca'/%3E%3Cpath d='M10 122c0-26 17-40 38-40s38 14 38 40z' fill='%23c5d3ca'/%3E%3C/svg%3E">
+        <div>
+          <label for="photo" style="margin-top:0">تصویر <i>*</i></label>
+          <input id="photo" type="file" accept="image/*">
+          <p class="hint">پاسپورٹ سائز کی صاف تصویر لگائیں۔</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div><label for="name">نام <i>*</i></label><input id="name" autocomplete="name"></div>
+        <div><label for="father">والد کا نام <i>*</i></label><input id="father"></div>
+      </div>
+      <label for="mobile">موبائل نمبر <i>*</i></label>
+      <input id="mobile" type="tel" inputmode="numeric" class="ltr" maxlength="15" placeholder="9876543210">
+    </div>
 
-    <label for="name">نام</label>
-    <input id="name" autocomplete="name">
+    <div class="grp">
+      <h3>تعلیمی معلومات</h3>
+      <div class="grid">
+        <div><label for="jamia">کس جامعہ سے فارغ ہیں؟ <i>*</i></label>
+          <select id="jamia"><option value="">منتخب کریں</option>
+            <option>ممبئی</option><option>نیپال</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
+          </select></div>
+        <div><label for="year">فراغت کا سال <i>*</i></label>
+          <input id="year" type="number" inputmode="numeric" class="ltr" min="1990" max="2030"></div>
+      </div>
+    </div>
 
-    <label for="father">والد کا نام</label>
-    <input id="father">
+    <div class="grp">
+      <h3>ٹیسٹ کی معلومات</h3>
+      <label for="center">کہاں ٹیسٹ دیں گے؟ <i>*</i></label>
+      <select id="center"><option value="">منتخب کریں</option>
+        <option>ممبئی</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
+      </select>
+    </div>
 
-    <label for="mobile">موبائل نمبر</label>
-    <input id="mobile" type="tel" inputmode="numeric" class="ltr" maxlength="15">
-
-    <label for="jamia">کس جامعہ سے فارغ ہیں؟</label>
-    <select id="jamia"><option value="">منتخب کریں</option>
-      <option>ممبئی</option><option>نیپال</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
-    </select>
-
-    <label for="year">فراغت کا سال</label>
-    <input id="year" type="number" inputmode="numeric" class="ltr" min="1990" max="2030">
-
-    <label for="center">کہاں ٹیسٹ دیں گے؟</label>
-    <select id="center"><option value="">منتخب کریں</option>
-      <option>ممبئی</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
-    </select>
-
-    <button id="send" type="button">درخواست جمع کریں</button>
+    <button id="send" class="btn" type="button">درخواست جمع کریں</button>
   </div>
   <div id="res1" class="msg" role="status"></div>
 </section>
 
-<section>
-  <h2>اسٹیٹس اور نتیجہ دیکھیں</h2>
-  <label for="c2">ٹریکنگ کوڈ</label>
-  <input id="c2" class="ltr" autocapitalize="characters">
-  <label for="m2">درخواست میں دیا گیا موبائل نمبر</label>
-  <input id="m2" type="tel" inputmode="numeric" class="ltr">
-  <button id="check" type="button">اسٹیٹس دیکھیں</button>
+<section id="p2" hidden>
+  <div class="form">
+    <p class="lead">درخواست جمع کرتے وقت ملنے والا ٹریکنگ کوڈ اور وہی موبائل نمبر درج کریں۔</p>
+    <label for="c2">ٹریکنگ کوڈ</label>
+    <input id="c2" class="ltr" autocapitalize="characters" placeholder="TK123456">
+    <label for="m2">درخواست میں دیا گیا موبائل نمبر</label>
+    <input id="m2" type="tel" inputmode="numeric" class="ltr">
+    <button id="check" class="btn" type="button">اسٹیٹس دیکھیں</button>
+  </div>
   <div id="res2" class="msg" role="status"></div>
 </section>
 
@@ -113,6 +148,13 @@ let photoData = "";
 function show(el, cls, html){ el.className = "msg " + cls; el.innerHTML = html; }
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
+function tab(n){
+  $("p1").hidden = n !== 1; $("p2").hidden = n !== 2;
+  $("t1").classList.toggle("on", n === 1); $("t2").classList.toggle("on", n === 2);
+}
+$("t1").onclick = () => tab(1);
+$("t2").onclick = () => tab(2);
+
 // Tasveer ko chhota (max 480px) karke base64 banana
 $("photo").addEventListener("change", e => {
   const f = e.target.files[0];
@@ -124,7 +166,7 @@ $("photo").addEventListener("change", e => {
     c.width = img.width * s; c.height = img.height * s;
     c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
     photoData = c.toDataURL("image/jpeg", 0.8);
-    $("prev").src = photoData; $("prev").style.display = "block";
+    $("prev").src = photoData; $("prev").style.border = "2px solid #9fd0bd";
   };
   img.src = URL.createObjectURL(f);
 });
@@ -146,8 +188,12 @@ $("send").addEventListener("click", async () => {
     const r = await fetch(API, { method: "POST", body: JSON.stringify(d) });
     const j = await r.json();
     if (!j.ok) throw new Error(j.error || "");
-    show($("res1"), "ok", "آپ کی درخواست جمع ہو گئی۔ آپ کا ٹریکنگ کوڈ:<div class='code'>" + esc(j.code) + "</div>اسے محفوظ کر لیں، نتیجہ دیکھنے کے لیے یہی کوڈ اور آپ کا موبائل نمبر درکار ہوگا۔");
     $("form").style.display = "none";
+    $("res1").className = "";
+    $("res1").innerHTML = "<div class='done'><div class='tick'>✓</div><h3>آپ کی درخواست جمع ہو گئی</h3><div>آپ کا ٹریکنگ کوڈ</div>" +
+      "<div class='code'>" + esc(j.code) + "</div>" +
+      "<button class='btn ghost' type='button' onclick=\"navigator.clipboard&&navigator.clipboard.writeText('" + esc(j.code) + "');this.textContent='کوڈ کاپی ہو گیا'\">کوڈ کاپی کریں</button>" +
+      "<p class='hint'>اسے محفوظ کر لیں یا اسکرین شاٹ لے لیں۔ نتیجہ دیکھنے کے لیے یہی کوڈ اور آپ کا موبائل نمبر درکار ہوگا۔</p></div>";
   } catch (err) {
     show($("res1"), "bad", "درخواست جمع نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔");
     $("send").disabled = false; $("send").textContent = "درخواست جمع کریں";
@@ -155,26 +201,27 @@ $("send").addEventListener("click", async () => {
 });
 
 function score(v){
-  if (v === "" || v == null) return "<div class='rc-sc'><div class='n'><small>ابھی جاری نہیں ہوا</small></div></div>";
-  if (isNaN(v)) return "<div class='rc-sc'><div class='n'><b style='font-size:24px'>" + esc(v) + "</b></div></div>";
-  return "<div class='rc-sc'><div class='n'><b>" + esc(v) + "</b><span>100 /</span></div></div>";
+  if (v === "" || v == null) return "<small>ابھی جاری نہیں ہوا</small>";
+  if (isNaN(v)) return "<div class='big'>" + esc(v) + "</div>";
+  return "<b>" + esc(v) + "</b> <span>/ 100</span>";
 }
 function card(j){
   const s = String(j.status || "").toLowerCase();
   const cls = /pass|کامیاب/.test(s) ? "p" : /fail|ناکام/.test(s) ? "f" : "w";
   const now = new Date().toLocaleString("en-GB");
-  return "<div class='rc'><div class='rc-h'><div class='rc-t'>تخصصات انٹری ٹیسٹ</div><div class='rc-s'>Result Card · 2027</div></div><div class='rc-b'>" +
+  return "<div class='rc'><div class='rc-h'><div class='rc-t'>تخصص فی الفقہ انٹری ٹیسٹ</div><div class='rc-s'>Result Card · 2027</div></div><div class='rc-b'>" +
     "<div class='rc-top'>" + (j.photo ? "<img src='" + esc(j.photo) + "' alt='' onerror=\"this.style.display='none'\">" : "") +
     "<div class='rc-info'><div class='rc-name'>" + esc(j.name) + "</div>" +
     "<div>والد: " + esc(j.father) + "</div>" +
-    "<div>موبائل: <span style='direction:ltr;display:inline-block'>" + esc(j.mobile) + "</span></div>" +
+    "<div>موبائل: <span class='num'>" + esc(j.mobile) + "</span></div>" +
     "<div>ٹیسٹ کا مقام: " + esc(j.center) + "</div>" +
     "<div>کوڈ: <b>" + esc(j.code) + "</b></div></div></div>" +
     (j.takhassus ? "<div class='rc-box'><small>تخصص کا نام</small><div class='big'>" + esc(j.takhassus) + "</div></div>" : "") +
     "<div class='rc-box rc-st " + cls + "'><div class='big'>اسٹیٹس: " + esc(j.status || "زیرِ غور") + "</div></div>" +
-    "<div class='rc-box rc-sc'><div>تحریری ٹیسٹ</div>" + score(j.tahreeri) + "</div>" +
-    "<div class='rc-box rc-sc'><div>تقریری ٹیسٹ</div>" + score(j.taqreeri) + "</div>" +
-    "</div><div class='rc-f'>دیکھنے کا وقت: <span style='direction:ltr;display:inline-block'>" + now + "</span></div></div>";
+    "<div class='rc-grid'><div class='rc-box'><small>تحریری ٹیسٹ</small>" + score(j.tahreeri) + "</div>" +
+    "<div class='rc-box'><small>تقریری ٹیسٹ</small>" + score(j.taqreeri) + "</div></div>" +
+    "<button class='btn ghost noprint' type='button' onclick='window.print()'>پرنٹ / PDF محفوظ کریں</button>" +
+    "</div><div class='rc-f'>دیکھنے کا وقت: <span class='num'>" + now + "</span></div></div>";
 }
 
 $("check").addEventListener("click", async () => {
