@@ -65,11 +65,6 @@ td:first-child{color:var(--mute);width:42%}
     <label for="year">فراغت کا سال</label>
     <input id="year" type="number" inputmode="numeric" class="ltr" min="1990" max="2030">
 
-    <label for="takhassus">کس تخصص کا ٹیسٹ دینا ہے؟</label>
-    <select id="takhassus"><option value="">منتخب کریں</option>
-      <option>تخصص فی الحدیث</option><option>تخصص فی التدریس</option><option>تخصص فی العقیدۃ و الکلام</option>
-    </select>
-
     <label for="center">کہاں ٹیسٹ دیں گے؟</label>
     <select id="center"><option value="">منتخب کریں</option>
       <option>ممبئی</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
@@ -92,7 +87,6 @@ td:first-child{color:var(--mute);width:42%}
 
 </main>
 <script>
-// Apps Script ka Web app URL yahan paste karein
 const API = "https://script.google.com/macros/s/AKfycbzCNjQoOkUvDYYOmVH9qbNtcjPWZ3l5nKv_-qOtO1cAmRqG5PVRtfaGDATCWHtAWaSd/exec";
 
 const $ = id => document.getElementById(id);
@@ -121,11 +115,11 @@ $("send").addEventListener("click", async () => {
   const d = {
     name: $("name").value.trim(), father: $("father").value.trim(),
     mobile: $("mobile").value.trim(), jamia: $("jamia").value,
-    year: $("year").value, takhassus: $("takhassus").value,
+    year: $("year").value,
     center: $("center").value, photo: photoData
   };
   if (!d.photo) return show($("res1"), "bad", "براہ کرم اپنی تصویر لگائیں۔");
-  for (const k of ["name","father","mobile","jamia","year","takhassus","center"])
+  for (const k of ["name","father","mobile","jamia","year","center"])
     if (!d[k]) return show($("res1"), "bad", "براہ کرم تمام خانے مکمل کریں۔");
   if (!/^\d{10,13}$/.test(d.mobile)) return show($("res1"), "bad", "موبائل نمبر درست درج کریں (صرف اعداد)۔");
 
