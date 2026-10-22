@@ -27,10 +27,28 @@ button:disabled{opacity:.6;cursor:wait}
 .ok{display:block;background:#e6f2ec;border:1px solid #9cc7b5}
 .bad{display:block;background:#f9e8e8;border:1px solid #e0a9a9;color:var(--err)}
 .code{font-size:30px;font-weight:700;letter-spacing:2px;color:var(--green);direction:ltr;text-align:center;margin:6px 0;user-select:all}
-table{width:100%;border-collapse:collapse;margin-top:6px}
-td{padding:6px 4px;border-bottom:1px solid var(--line)}
-td:first-child{color:var(--mute);width:42%}
 .ltr{direction:ltr;text-align:right}
+.rc{margin-top:18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.rc-h{background:linear-gradient(135deg,#17503f,#27856a);color:#fff;text-align:center;padding:22px 12px}
+.rc-t{font-size:26px;font-weight:700}
+.rc-s{direction:ltr;font-size:17px;color:#d6ebe2;font-family:system-ui,sans-serif}
+.rc-b{padding:18px 16px}
+.rc-top{display:flex;gap:16px;align-items:flex-start}
+.rc-top img{width:104px;height:132px;object-fit:cover;border:3px solid #cfe7dc;border-radius:10px;flex:none}
+.rc-info{line-height:2}
+.rc-name{font-size:24px;font-weight:700}
+.rc-info b{color:var(--green);letter-spacing:1px;direction:ltr;display:inline-block}
+.rc-box{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-top:14px;text-align:center}
+.rc-box small{display:block;color:var(--mute);font-size:14px}
+.rc-box .big{font-size:22px;font-weight:700}
+.rc-st.p{background:#dcf5e5;border-color:#bfe3cc;color:#17503f}
+.rc-st.f{background:#fbe5e5;border-color:#efc0c0;color:#a32a2a}
+.rc-st.w{background:#fdf1d8;border-color:#ecd49a;color:#7a5608}
+.rc-sc{text-align:right}
+.rc-sc .n{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+.rc-sc .n b{font-size:34px;font-family:system-ui,sans-serif}
+.rc-sc .n span{direction:ltr;color:var(--mute);font-family:system-ui,sans-serif}
+.rc-f{background:#f2f4f2;border-top:1px solid var(--line);text-align:center;padding:8px;font-size:15px;color:var(--mute)}
 </style>
 </head>
 <body>
@@ -136,6 +154,29 @@ $("send").addEventListener("click", async () => {
   }
 });
 
+function score(v){
+  if (v === "" || v == null) return "<div class='rc-sc'><div class='n'><small>ابھی جاری نہیں ہوا</small></div></div>";
+  if (isNaN(v)) return "<div class='rc-sc'><div class='n'><b style='font-size:24px'>" + esc(v) + "</b></div></div>";
+  return "<div class='rc-sc'><div class='n'><b>" + esc(v) + "</b><span>100 /</span></div></div>";
+}
+function card(j){
+  const s = String(j.status || "").toLowerCase();
+  const cls = /pass|کامیاب/.test(s) ? "p" : /fail|ناکام/.test(s) ? "f" : "w";
+  const now = new Date().toLocaleString("en-GB");
+  return "<div class='rc'><div class='rc-h'><div class='rc-t'>تخصصات انٹری ٹیسٹ</div><div class='rc-s'>Result Card · 2027</div></div><div class='rc-b'>" +
+    "<div class='rc-top'>" + (j.photo ? "<img src='" + esc(j.photo) + "' alt='' onerror=\"this.style.display='none'\">" : "") +
+    "<div class='rc-info'><div class='rc-name'>" + esc(j.name) + "</div>" +
+    "<div>والد: " + esc(j.father) + "</div>" +
+    "<div>موبائل: <span style='direction:ltr;display:inline-block'>" + esc(j.mobile) + "</span></div>" +
+    "<div>ٹیسٹ کا مقام: " + esc(j.center) + "</div>" +
+    "<div>کوڈ: <b>" + esc(j.code) + "</b></div></div></div>" +
+    (j.takhassus ? "<div class='rc-box'><small>تخصص کا نام</small><div class='big'>" + esc(j.takhassus) + "</div></div>" : "") +
+    "<div class='rc-box rc-st " + cls + "'><div class='big'>اسٹیٹس: " + esc(j.status || "زیرِ غور") + "</div></div>" +
+    "<div class='rc-box rc-sc'><div>تحریری ٹیسٹ</div>" + score(j.tahreeri) + "</div>" +
+    "<div class='rc-box rc-sc'><div>تقریری ٹیسٹ</div>" + score(j.taqreeri) + "</div>" +
+    "</div><div class='rc-f'>دیکھنے کا وقت: <span style='direction:ltr;display:inline-block'>" + now + "</span></div></div>";
+}
+
 $("check").addEventListener("click", async () => {
   const code = $("c2").value.trim().toUpperCase(), mobile = $("m2").value.trim();
   if (!code || !mobile) return show($("res2"), "bad", "ٹریکنگ کوڈ اور موبائل نمبر دونوں درج کریں۔");
@@ -144,10 +185,7 @@ $("check").addEventListener("click", async () => {
     const r = await fetch(API + "?code=" + encodeURIComponent(code) + "&mobile=" + encodeURIComponent(mobile));
     const j = await r.json();
     if (!j.found) return show($("res2"), "bad", "اس کوڈ اور موبائل نمبر سے کوئی درخواست نہیں ملی۔");
-    show($("res2"), "ok", "<table><tr><td>نام</td><td>" + esc(j.name) + "</td></tr>" +
-      "<tr><td>اسٹیٹس</td><td>" + esc(j.status || "زیرِ غور") + "</td></tr>" +
-      "<tr><td>تقریری نتیجہ</td><td>" + esc(j.taqreeri || "ابھی جاری نہیں ہوا") + "</td></tr>" +
-      "<tr><td>تحریری نتیجہ</td><td>" + esc(j.tahreeri || "ابھی جاری نہیں ہوا") + "</td></tr></table>");
+    $("res2").className = ""; $("res2").innerHTML = card(j);
   } catch (err) {
     show($("res2"), "bad", "معلومات حاصل نہیں ہو سکیں۔ دوبارہ کوشش کریں۔");
   } finally { $("check").disabled = false; }
