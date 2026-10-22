@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ٹیسٹ رجسٹریشن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6f2;--ink:#1c2622;--mute:#5d6b65;--line:#d3dcd5;--green:#17503f;--gold:#9a6f12;--err:#a32a2a;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Naskh Arabic","Jameel Noori Nastaleeq",serif;font-size:18px;line-height:1.9}
+header{background:var(--green);color:#fff;padding:36px 20px 30px;text-align:center}
+header h1{margin:0 0 6px;font-size:34px;font-weight:700}
+header p{margin:0 auto;max-width:560px;color:#cfe3da;font-size:17px}
+main{max-width:640px;margin:0 auto;padding:24px 16px 60px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 20px;margin-bottom:24px}
+h2{margin:0 0 14px;font-size:24px;color:var(--green);border-bottom:2px solid var(--gold);display:inline-block;padding-bottom:2px}
+label{display:block;margin:14px 0 4px;font-weight:600}
+input,select{width:100%;padding:10px 12px;font:inherit;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+input:focus,select:focus,button:focus-visible{outline:3px solid #8fc2b0;outline-offset:1px}
+.hint{color:var(--mute);font-size:15px;margin:2px 0 0}
+#prev{display:none;width:110px;height:140px;object-fit:cover;border:1px solid var(--line);border-radius:6px;margin-top:8px}
+button{margin-top:20px;width:100%;padding:12px;font:inherit;font-weight:700;color:#fff;background:var(--green);border:0;border-radius:6px;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+.msg{margin-top:16px;padding:12px 14px;border-radius:6px;display:none}
+.ok{display:block;background:#e6f2ec;border:1px solid #9cc7b5}
+.bad{display:block;background:#f9e8e8;border:1px solid #e0a9a9;color:var(--err)}
+.code{font-size:30px;font-weight:700;letter-spacing:2px;color:var(--green);direction:ltr;text-align:center;margin:6px 0;user-select:all}
+table{width:100%;border-collapse:collapse;margin-top:6px}
+td{padding:6px 4px;border-bottom:1px solid var(--line)}
+td:first-child{color:var(--mute);width:42%}
+.ltr{direction:ltr;text-align:right}
+</style>
+</head>
+<body>
+<header>
+  <h1>ٹیسٹ رجسٹریشن</h1>
+  <p>اپنی تفصیلات درج کریں۔ جمع کرنے کے بعد آپ کو ایک ٹریکنگ کوڈ ملے گا، جس سے آپ بعد میں اپنا اسٹیٹس اور نتیجہ دیکھ سکتے ہیں۔</p>
+</header>
+<main>
+
+<section>
+  <h2>درخواست دیں</h2>
+  <div id="form">
+    <label for="photo">تصویر</label>
+    <input id="photo" type="file" accept="image/*">
+    <p class="hint">پاسپورٹ سائز کی صاف تصویر لگائیں۔</p>
+    <img id="prev" alt="منتخب تصویر">
+
+    <label for="name">نام</label>
+    <input id="name" autocomplete="name">
+
+    <label for="father">والد کا نام</label>
+    <input id="father">
+
+    <label for="mobile">موبائل نمبر</label>
+    <input id="mobile" type="tel" inputmode="numeric" class="ltr" maxlength="15">
+
+    <label for="jamia">کس جامعہ سے فارغ ہیں؟</label>
+    <select id="jamia"><option value="">منتخب کریں</option>
+      <option>ممبئی</option><option>نیپال</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
+    </select>
+
+    <label for="year">فراغت کا سال</label>
+    <input id="year" type="number" inputmode="numeric" class="ltr" min="1990" max="2030">
+
+    <label for="takhassus">کس تخصص کا ٹیسٹ دینا ہے؟</label>
+    <select id="takhassus"><option value="">منتخب کریں</option>
+      <option>تخصص فی الحدیث</option><option>تخصص فی التدریس</option><option>تخصص فی العقیدۃ و الکلام</option>
+    </select>
+
+    <label for="center">کہاں ٹیسٹ دیں گے؟</label>
+    <select id="center"><option value="">منتخب کریں</option>
+      <option>ممبئی</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
+    </select>
+
+    <button id="send" type="button">درخواست جمع کریں</button>
+  </div>
+  <div id="res1" class="msg" role="status"></div>
+</section>
+
+<section>
+  <h2>اسٹیٹس اور نتیجہ دیکھیں</h2>
+  <label for="c2">ٹریکنگ کوڈ</label>
+  <input id="c2" class="ltr" autocapitalize="characters">
+  <label for="m2">درخواست میں دیا گیا موبائل نمبر</label>
+  <input id="m2" type="tel" inputmode="numeric" class="ltr">
+  <button id="check" type="button">اسٹیٹس دیکھیں</button>
+  <div id="res2" class="msg" role="status"></div>
+</section>
+
+</main>
+<script>
+// Apps Script ka Web app URL yahan paste karein
+const API = "https://script.google.com/macros/s/AKfycbzCNjQoOkUvDYYOmVH9qbNtcjPWZ3l5nKv_-qOtO1cAmRqG5PVRtfaGDATCWHtAWaSd/exec";
+
+const $ = id => document.getElementById(id);
+let photoData = "";
+
+function show(el, cls, html){ el.className = "msg " + cls; el.innerHTML = html; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+// Tasveer ko chhota (max 480px) karke base64 banana
+$("photo").addEventListener("change", e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const img = new Image();
+  img.onload = () => {
+    const s = Math.min(1, 480 / Math.max(img.width, img.height));
+    const c = document.createElement("canvas");
+    c.width = img.width * s; c.height = img.height * s;
+    c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+    photoData = c.toDataURL("image/jpeg", 0.8);
+    $("prev").src = photoData; $("prev").style.display = "block";
+  };
+  img.src = URL.createObjectURL(f);
+});
+
+$("send").addEventListener("click", async () => {
+  const d = {
+    name: $("name").value.trim(), father: $("father").value.trim(),
+    mobile: $("mobile").value.trim(), jamia: $("jamia").value,
+    year: $("year").value, takhassus: $("takhassus").value,
+    center: $("center").value, photo: photoData
+  };
+  if (!d.photo) return show($("res1"), "bad", "براہ کرم اپنی تصویر لگائیں۔");
+  for (const k of ["name","father","mobile","jamia","year","takhassus","center"])
+    if (!d[k]) return show($("res1"), "bad", "براہ کرم تمام خانے مکمل کریں۔");
+  if (!/^\d{10,13}$/.test(d.mobile)) return show($("res1"), "bad", "موبائل نمبر درست درج کریں (صرف اعداد)۔");
+
+  $("send").disabled = true; $("send").textContent = "جمع ہو رہی ہے…";
+  try {
+    const r = await fetch(API, { method: "POST", body: JSON.stringify(d) });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || "");
+    show($("res1"), "ok", "آپ کی درخواست جمع ہو گئی۔ آپ کا ٹریکنگ کوڈ:<div class='code'>" + esc(j.code) + "</div>اسے محفوظ کر لیں، نتیجہ دیکھنے کے لیے یہی کوڈ اور آپ کا موبائل نمبر درکار ہوگا۔");
+    $("form").style.display = "none";
+  } catch (err) {
+    show($("res1"), "bad", "درخواست جمع نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔");
+    $("send").disabled = false; $("send").textContent = "درخواست جمع کریں";
+  }
+});
+
+$("check").addEventListener("click", async () => {
+  const code = $("c2").value.trim().toUpperCase(), mobile = $("m2").value.trim();
+  if (!code || !mobile) return show($("res2"), "bad", "ٹریکنگ کوڈ اور موبائل نمبر دونوں درج کریں۔");
+  $("check").disabled = true;
+  try {
+    const r = await fetch(API + "?code=" + encodeURIComponent(code) + "&mobile=" + encodeURIComponent(mobile));
+    const j = await r.json();
+    if (!j.found) return show($("res2"), "bad", "اس کوڈ اور موبائل نمبر سے کوئی درخواست نہیں ملی۔");
+    show($("res2"), "ok", "<table><tr><td>نام</td><td>" + esc(j.name) + "</td></tr>" +
+      "<tr><td>اسٹیٹس</td><td>" + esc(j.status || "زیرِ غور") + "</td></tr>" +
+      "<tr><td>تقریری نتیجہ</td><td>" + esc(j.taqreeri || "ابھی جاری نہیں ہوا") + "</td></tr>" +
+      "<tr><td>تحریری نتیجہ</td><td>" + esc(j.tahreeri || "ابھی جاری نہیں ہوا") + "</td></tr></table>");
+  } catch (err) {
+    show($("res2"), "bad", "معلومات حاصل نہیں ہو سکیں۔ دوبارہ کوشش کریں۔");
+  } finally { $("check").disabled = false; }
+});
+</script>
+</body>
+</html>
