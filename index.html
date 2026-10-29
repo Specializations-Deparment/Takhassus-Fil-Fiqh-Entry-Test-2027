@@ -39,6 +39,7 @@ input:focus,select:focus,.btn:focus-visible,.tabs button:focus-visible{outline:3
 .btn.ghost{background:#fff;color:var(--green);border:1px solid var(--green);margin-top:10px}
 .msg{margin-top:16px;padding:10px 14px;border-radius:8px;display:none}
 .bad{display:block;background:#fbeaea;border:1px solid #e4b3b3;color:var(--err)}
+.note{display:block;background:#fdf1d8;border:1px solid #ecd49a;color:#7a5608;text-align:center}
 .done{text-align:center;padding:6px 0}
 .tick{width:56px;height:56px;line-height:56px;margin:0 auto;border-radius:50%;background:#dcf5e5;color:var(--green);font-size:30px;font-family:var(--num)}
 .done h3{margin:8px 0 0;color:var(--green)}
@@ -106,7 +107,7 @@ input:focus,select:focus,.btn:focus-visible,.tabs button:focus-visible{outline:3
       <div class="grid">
         <div><label for="jamia">کس جامعہ سے فارغ ہیں؟ <i>*</i></label>
           <select id="jamia"><option value="">منتخب کریں</option>
-            <option>ممبئی</option><option>نیپال</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
+            <option>ممبئی</option><option>نیپال</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option><option>احمدآباد</option>
           </select></div>
         <div><label for="year">فراغت کا سال <i>*</i></label>
           <input id="year" type="number" inputmode="numeric" class="ltr" min="1990" max="2030"></div>
@@ -117,7 +118,7 @@ input:focus,select:focus,.btn:focus-visible,.tabs button:focus-visible{outline:3
       <h3>ٹیسٹ کی معلومات</h3>
       <label for="center">کہاں ٹیسٹ دیں گے؟ <i>*</i></label>
       <select id="center"><option value="">منتخب کریں</option>
-        <option>ممبئی</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
+        <option>ممبئی</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option><option>احمدآباد</option>
       </select>
     </div>
 
@@ -141,6 +142,7 @@ input:focus,select:focus,.btn:focus-visible,.tabs button:focus-visible{outline:3
 </main>
 <script>
 const API = "https://script.google.com/macros/s/AKfycbzCNjQoOkUvDYYOmVH9qbNtcjPWZ3l5nKv_-qOtO1cAmRqG5PVRtfaGDATCWHtAWaSd/exec";
+const REG_CLOSED = false;   // true = registration band, false = khuli
 
 const $ = id => document.getElementById(id);
 let photoData = "";
@@ -187,6 +189,7 @@ $("send").addEventListener("click", async () => {
   try {
     const r = await fetch(API, { method: "POST", body: JSON.stringify(d) });
     const j = await r.json();
+    if (j.closed) return closeReg();
     if (!j.ok) throw new Error(j.error || "");
     $("form").style.display = "none";
     $("res1").className = "";
@@ -237,6 +240,16 @@ $("check").addEventListener("click", async () => {
     show($("res2"), "bad", "معلومات حاصل نہیں ہو سکیں۔ دوبارہ کوشش کریں۔");
   } finally { $("check").disabled = false; }
 });
+
+function closeReg(){
+  $("form").style.display = "none";
+  $("p1").querySelector(".lead").style.display = "none";
+  show($("res1"), "note", "رجسٹریشن بند ہو چکی ہے۔ جن امیدواروں نے درخواست دی تھی وہ «اسٹیٹس اور نتیجہ» میں اپنا ٹریکنگ کوڈ اور موبائل نمبر ڈال کر اپنا نتیجہ دیکھ سکتے ہیں۔");
+  tab(2);
+}
+if (REG_CLOSED) closeReg();
+else fetch(API + "?action=status").then(r => r.json())
+  .then(j => { if (j.open === false) closeReg(); }).catch(() => {});
 </script>
 </body>
 </html>
