@@ -107,7 +107,7 @@ input:focus,select:focus,.btn:focus-visible,.tabs button:focus-visible{outline:3
       <div class="grid">
         <div><label for="jamia">کس جامعہ سے فارغ ہیں؟ <i>*</i></label>
           <select id="jamia"><option value="">منتخب کریں</option>
-            <option>ممبئی</option><option>نیپال</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option><option>احمدآباد</option>
+            <option>ممبئی</option><option>نیپال</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
           </select></div>
         <div><label for="year">فراغت کا سال <i>*</i></label>
           <input id="year" type="number" inputmode="numeric" class="ltr" min="1990" max="2030"></div>
@@ -118,7 +118,7 @@ input:focus,select:focus,.btn:focus-visible,.tabs button:focus-visible{outline:3
       <h3>ٹیسٹ کی معلومات</h3>
       <label for="center">کہاں ٹیسٹ دیں گے؟ <i>*</i></label>
       <select id="center"><option value="">منتخب کریں</option>
-        <option>ممبئی</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option><option>احمدآباد</option>
+        <option>ممبئی</option><option>ناگپور</option><option>موڈاسا</option><option>شاہ جہان پور</option><option>آگرہ</option>
       </select>
     </div>
 
@@ -142,7 +142,7 @@ input:focus,select:focus,.btn:focus-visible,.tabs button:focus-visible{outline:3
 </main>
 <script>
 const API = "https://script.google.com/macros/s/AKfycbzCNjQoOkUvDYYOmVH9qbNtcjPWZ3l5nKv_-qOtO1cAmRqG5PVRtfaGDATCWHtAWaSd/exec";
-const REG_CLOSED = false;   // true = registration band, false = khuli
+const REG_CLOSED = true;   // true = registration band, false = khuli
 
 const $ = id => document.getElementById(id);
 let photoData = "";
